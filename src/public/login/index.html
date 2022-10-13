@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login</title>
+
+    <style>
+      .country {
+        border: 0;
+        outline: 0;
+        border-bottom: 1px solid #000;
+        background-color: transparent;
+      }
+
+      #phone {
+        border: 0;
+        outline: 0;
+        border-bottom: 1px solid #000;
+      }
+      #myButton {
+        margin-top: 15px;
+      }
+      #field-name {
+        margin-top: 10px;
+      }
+      #partitioned {
+        margin-top: 10px;
+  padding-left: 15px;
+  letter-spacing: 42px;
+  border: 0;
+  background-image: linear-gradient(to left, black 70%, rgba(255, 255, 255, 0) 0%);
+  background-position: bottom;
+  background-size: 50px 1px;
+  background-repeat: repeat-x;
+  background-position-x: 35px;
+  width: 220px;
+  min-width: 220px;
+}
+
+      
+      
+   
+    </style>
+
+    <script></script>
+  </head>
+
+  <body>
+    <form id="loginForm" action="" name="loginForm" method="post">
+      <div class="otp-num">
+        <h1>ENTER YOUR PHONE NUMBER</h1>
+        <td id="number">
+          <select class="country">
+            <option>+1</option>
+            <option>+91</option>
+          </select>
+
+          <input
+            type="tel"
+            id="phone"
+            placeholder="(405) 123-4567"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}"
+            maxlength="20"
+            name="number"
+            required
+          />
+        </td>
+
+        
+      </div>
+      <div>
+        <input id="partitioned" type="text" maxlength="4" value="" />
+      </div>
+      <div>
+        <button
+          id="myButton"
+          type="submit"
+          value="Login"
+          onclick="myFunction()"
+        >
+          Next
+        </button>
+      </div>
+    </form>
+
+    <!-- <script>
+      document.querySelector("input").keypress(function(){
+        if ( document.querySelector(this).value.length > 1){
+         document.querySelector(this).classList.add('active');
+         }
+       });
+       </script> -->
+    <script>
+      function myFunction() {
+        const number = document.getElementById("phone").value;
+        // const user = localStorage.getItem(number);
+        // const data = JSON.parse(user);
+        // console.log(data);
+
+        if (number) {
+          window.location.href = "http://localhost:8000";
+          alert("Successfully login");
+        } else {
+          alert("Invalid details");
+        }
+      }
+
+      function callApi(url, method = "GET", data, cb) {
+        var _url = `http://localhost:8000${url}`;
+        let f = null;
+        // Making our request
+        const prePayload = new FormData(loginForm);
+        const payload = new URLSearchParams(prePayload);
+        console.log([...payload]);
+        f = fetch(_url, {
+          method: "POST",
+          body: payload,
+        });
+
+        // if(method="POST"){
+        //  f = fetch(_url, { method: method, body:JSON.stringify(data), headers: new Headers({'Content-Type': 'application/json; charset=utf-8'}), });
+        // }else{
+        //  f = fetch(_url, { method: method,headers: new Headers({'Content-Type': 'application/json; charset=utf-8'})   });
+        // }
+        f.then((Result) => Result.json())
+          .then((string) => {
+            //Printing our response
+            console.log(string);
+            if (cb) {
+              cb(string);
+            }
+          })
+          .catch((errorMsg) => {
+            console.log(errorMsg);
+          });
+      }
+
+      document.querySelector("#loginForm").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target).entries());
+        callApi("auth", "POST", data, (res) => {
+          localStorage.getItem("accessToken", res.accessToken);
+        });
+        return false;
+      });
+    </script>
+  </body>
+</html>

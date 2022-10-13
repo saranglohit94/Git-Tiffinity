@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200"
+    />
+    <style>
+      .box {
+        display: block;
+      }
+      #add,
+      #minus {
+        width: 20px;
+        height: 20px;
+      }
+      #total-count {
+        font-weight: 900;
+        font-size: 20px;
+      }
+      .total{
+        display: inline;
+      }
+      /* .container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+} */
+    </style>
+    <title>Select List</title>
+  </head>
+  <body>
+    <form action="">
+      <div class="container">
+        <label for="">Select Option</label>
+        <div class="box">
+          <input type="checkbox" />Roti
+          <div class="total">
+          <div id="minus-count">
+            <input type="image" id="minus" src="/icon/minus.png" />
+          </div>
+          <div id="total-count"></div>
+          <div id="add-count">
+            <input type="image" id="add" src="/icon/add.png" />
+          </div>
+        </div>
+        </div>
+
+        <div class="box"><input type="checkbox" />Dry Subji(veg)</div>
+        <div class="box"><input type="checkbox" />Curry Subji(veg)</div>
+        <div class="box"><input type="checkbox" />Rice</div>
+        <div class="box"><input type="checkbox" />Curd</div>
+        <div class="box"><input type="checkbox" />Buttermilk</div>
+        <div class="box"><input type="checkbox" />Pickels</div>
+        <div class="box"><input type="checkbox" />Dessert</div>
+        <div class="box"><input type="checkbox" />Pappad</div>
+        <div class="box"><input type="checkbox" />Dry Subji(non-veg)</div>
+        <div class="box"><input type="checkbox" />Curry Subji(non-veg)</div>
+        <div class="box"><input type="checkbox" />Anda Curry</div>
+      </div>
+    </form>
+    <script>
+      var decrementCount = document.getElementById("minus-count");
+      var incrementCount = document.getElementById("add-count");
+      var totalCount = document.getElementById("total-count");
+      var count = 0;
+      totalCount.innerHTML = count;
+
+      decrementCount.addEventListener("click", function () {
+        count--;
+        totalCount.innerHTML = count;
+      });
+      incrementCount.addEventListener("click", function () {
+        count++;
+        totalCount.innerHTML = count;
+      });
+    </script>
+  </body>
+</html>

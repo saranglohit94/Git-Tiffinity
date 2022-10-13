@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <style>
+      .cust {
+        margin-top: 20px;
+        height:40px;
+    width:300px;
+      }
+      .cat{
+        margin-top: 15px;
+      }
+   #veg{
+    width: 20px;
+    margin-right: 10px;
+   }
+   #non-veg{
+    width: 20px;
+    margin-right: 10px;
+   
+   }
+      .img {
+    height:40px;
+    width:300px;
+    position:relative;
+}
+
+img {
+    height:15px;
+    position:absolute;
+    right:0;
+    top:5px;
+}
+
+input {
+    width:100%;
+}
+
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <form action="/" method="POST" enctype="multipart/form-data">
+        <h1>Create Meal</h1>
+        <!-- <h2>Basic Details</h2> -->
+        <!-- <div class="drag-zone">
+          <label for="image">Drag or <span class="click">Click Here</span> </label>
+          <input type="file" id="image" name="image" value="" required />
+        </div> -->
+        <!-- <div>
+          <label for="image">Upload Image</label>
+          <input type="file" id="image" name="image" value="" required />
+        </div> -->
+        <div class="cust">
+          <label for="name"></label>
+          <input
+            type="text"
+            id="name"
+            placeholder="Title of the meal"
+            value=""
+            name="name"
+            required
+          />
+        </div>
+       
+        <div class="meal">
+          <label for ="meal">Select Meal Type</label>
+          <div class="cat">
+          <label for="veg"><input id="veg" name="veg" type="radio" value="vg">Veg<label>
+            <label for="non-veg"><input id="non-veg" name="non-veg" type="radio" value="nvg">Non-veg<label></label>
+          </div>
+          </div>
+        <div class="cust">
+          <div class="img">
+          <label for="bname"></label>
+          <img src="/icon/arrow.png"  onclick="onvalid()" alt="" >
+          <input
+            type="text"
+            id="bname"
+            placeholder="Define Menu Items"
+            value=""
+            name="bname"
+            required
+          />
+        </div>
+
+          
+        </div>
+        <div class="cust">
+            <label for="bname"></label>
+            <input
+              type="text"
+              id="bname"
+              placeholder="Meal Price"
+              value=""
+              name="bname"
+              required
+            />
+          </div>
+
+        <div class="cust">
+          <button type="submit" onclick="onsubmit()">Add Meal</button>
+        </div>
+      </form>
+    </div>
+    <script>
+     function onvalid() {
+        window.location.href = "http://localhost:8000/list";
+      }
+      function onsubmit() {
+        window.location.href = "http://localhost:8000/list";
+      }
+       
+    </script>
+  </body>
+</html>

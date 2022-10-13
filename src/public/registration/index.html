@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+      .cust {
+        margin-top: 20px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div>
+      <form action="http://localhost:8000/registration" id="form" method="POST" enctype="multipart/form-data">
+        <h1>LETS SET UP YOUR BUSINESS</h1>
+        <h2>Basic Details</h2>
+        <!-- <div class="drag-zone">
+          <label for="image">Drag or <span class="click">Click Here</span> </label>
+          <input type="file" id="image" name="image" value="" required />
+        </div> -->
+        <div>
+          <label for="image">Upload Image</label>
+          <input type="file" id="image" name="images" value="" required />
+        </div>
+        <div class="cust">
+          <label for="name">Owner Name</label>
+          <input
+            type="text"
+            id="name"
+            placeholder=""
+            value=""
+            name="ownername"
+            required
+          />
+        </div>
+        <div class="cust">
+          <label for="bname">Business Name</label>
+          <input
+            type="text"
+            id="bname"
+            placeholder=""
+            value=""
+            name="businessname"
+            required
+          />
+        </div>
+
+        <div class="cust">
+          <button type="submit" onclick="onvalid()">Next</button>
+        </div>
+      </form>
+    </div>
+
+    <script>
+      // function onvalid() {
+      //   window.location.href = "http://localhost:8000/cust";
+      //   // alert("Successfully Set Up  Your Business");
+      // }
+
+      function callApi(url, method = "GET", data, cb) {
+        var _url = `http://localhost:8000/registration${url}`;
+        let f = null;
+        // Making our request
+        const prePayload = new FormData(form);
+        const payload = new URLSearchParams(prePayload);
+        console.log([...payload]);
+        f = fetch(_url, {
+          method: "POST",
+          body: payload,
+        });
+
+        // if(method="POST"){
+        //  f = fetch(_url, { method: method, body:JSON.stringify(data), headers: new Headers({'Content-Type': 'application/json; charset=utf-8'}), });
+        // }else{
+        //  f = fetch(_url, { method: method,headers: new Headers({'Content-Type': 'application/json; charset=utf-8'})   });
+        // }
+        f.then((Result) => Result.json())
+          .then((string) => {
+            //Printing our response
+            console.log(string);
+            if (cb) {
+              cb(string);
+            }
+          })
+          .catch((errorMsg) => {
+            console.log(errorMsg);
+          });
+      }
+
+      document.querySelector("#form").addEventListener("submit", (e) => {
+        e.preventDefault();
+        const data = Object.fromEntries(new FormData(e.target).entries());
+        callApi("registration", "POST", data, (res) => {
+          // localStorage.setItem("accessToken", res.accessToken);
+        });
+        return false;
+      });
+    </script>
+  </body>
+</html>
