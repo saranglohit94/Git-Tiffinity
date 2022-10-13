@@ -10,14 +10,14 @@ const multer = require("multer");
 const registrationController = require("../controller/registration.controller");
 const Registration = require("../models/registration.models");
 
-// const { body, validationResult } = require("express-validator");
+
 const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     // cb(null, "../uploads/")
     // cb(null, path.join(__dirname, './uploads/'));
-    fs.mkdir("./uploads/", (err) => {
+    fs.mkdir("./uploads/", (err) => { 
       cb(null, "./uploads/");
     });
   },
@@ -51,7 +51,7 @@ const upload = multer({
   fileFilter: fileFilter,
 });
 
-// router.post('/registration', upload.single('uploads'), registrationController.singleImageUpload);
+
 
 router.post("/", upload.single("images"), (req, res, next) => {
   console.log(req.file,req.body);
